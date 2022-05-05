@@ -1,17 +1,34 @@
-import { request } from "./axiosUtils";
+import { RequestTypes } from "./../interfaces/common";
+import { fetchData } from "./axiosUtils";
 import { LoginReq } from "./../interfaces/apiReqRes";
-import { API_URLS } from "../config";
+import { AppDispatch } from "../redux/store";
+import { API_URLS } from "../config/apiUrls";
 
-export const loginUser = (data: LoginReq) => {
-  return request({
-    url: API_URLS.AUTH.LOGIN,
-    method: "post",
-    data,
-    isAuth: false,
+export const loginUser = (data: LoginReq) => (dispatch: AppDispatch) => {
+  return new Promise((resolve, reject) => {
+    fetchData({
+      url: API_URLS.AUTH.LOGIN,
+      method: RequestTypes.POST,
+      data,
+    })
+      .then((res: any) => {
+        localStorage.setItem("token", res.token);
+        return resolve(res);
+      })
+      .catch((error) => {
+        return reject(error);
+      });
   });
 };
 
-export const logoutUser = () => {
+export const getUser = () => (dispatch: AppDispatch) =>
+  fetchData({
+    url: API_URLS.AUTH.ME,
+    method: RequestTypes.GET,
+    data: null,
+  });
+
+/* export const logoutUser = () => {
   return request({
     url: API_URLS.AUTH.LOGOUT,
     method: "post",
@@ -19,10 +36,14 @@ export const logoutUser = () => {
   });
 };
 
-export const getUser = () => {
+ */
+
+/* export const listUsers = () => {
   return request({
-    url: API_URLS.AUTH.ME,
+    url: API_URLS.AUTH.LOGIN + 'test',
     method: "get",
-    isAuth: true,
+    params: {page: 1},
+    isAuth: false,
   });
 };
+ */

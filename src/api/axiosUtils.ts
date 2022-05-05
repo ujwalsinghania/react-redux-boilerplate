@@ -1,26 +1,57 @@
-import axios from "axios";
-import { logout } from "../redux/reducers/userReducer";
+import axios, { AxiosRequestConfig } from "axios";
+import { setLoading } from "../redux/reducers/commonReducer";
 import store from "../redux/store";
-import { API_BASE_URL } from "./../config/siteUrls";
 
-const client = axios.create({ baseURL: API_BASE_URL });
-
-export const request = ({ ...options }) => {
-  if (options.isAuth) {
-    options["headers"] = {
-      Authorization: "Bearer " + localStorage.getItem("token"),
-    };
-    delete options.isAuth;
-  }
-  const onSuccess = (response: any) => response;
-  const onError = (error: any) => {
-    if (error?.response?.status === 401) {
-      localStorage.removeItem("token");
-      store.dispatch(logout());
-      window.location.href = "/login";
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.interceptors.request.use(
+  function (config: AxiosRequestConfig) {
+    let token: string | null = localStorage.getItem("token");
+    if (token && config.headers) {
+      config.headers.Authorization = 'Bearer '+token;
     }
+    return config;
+  },
+  function (error) {
+    // Do something with request error
     return Promise.reject(error);
-  };
+  }
+);
 
-  return client(options).then(onSuccess).catch(onError);
+export const fetchData = ({
+  url = "",
+  method = undefined,
+  data = null,
+  showLoader = true,
+}: any) => {
+  return new Promise((resolve, reject) => {
+    if (showLoader) {
+      store.dispatch(setLoading(true));
+    }
+    const dataOrParams = ["GET", "DELETE"].includes(method || "get")
+      ? "params"
+      : "data";
+
+    //use axios interceptor
+    axios({
+      url,
+      method,
+      [dataOrParams]: data,
+    })
+      .then((resp) => {
+        return resolve(resp.data);
+      })
+      .catch((error) => {
+        const { response } = error;
+        if (response?.status === 403) {
+          //store.dispatch(logoutUser());
+        }
+        return reject({
+          error: response.data,
+          message: response?.data?.statusCode,
+        });
+      })
+      .finally(() => {
+        store.dispatch(setLoading(false));
+      });
+  });
 };

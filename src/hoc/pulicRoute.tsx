@@ -2,9 +2,9 @@ import { Route, Redirect } from "react-router-dom";
 import { useAppAuthSelector } from "../hooks/selectors/userSelector";
 import UnAuthLayout from "../layouts/unAuthLayout";
 
-const PublicRoute = ({ children, ...rest }: any) => {
+const PublicRoute = ({ component:Component, ...rest }: any) => {
   const isAuth = useAppAuthSelector();
-  console.log(rest.path, children)
+
   return (
     <Route
       path={rest.path}
@@ -13,7 +13,7 @@ const PublicRoute = ({ children, ...rest }: any) => {
         isAuth && rest.isRestricted ? (
           <Redirect to="/dashboard" />
         ) : (
-          <UnAuthLayout>{children}</UnAuthLayout>
+          <UnAuthLayout><Component {...props}/></UnAuthLayout>
         )
       }
     />

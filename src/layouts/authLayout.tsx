@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./common/header";
 
-interface AuthLayoutProps{
+interface AuthLayoutProps {
   children: JSX.Element;
 }
 

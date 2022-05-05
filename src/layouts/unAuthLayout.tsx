@@ -1,7 +1,7 @@
-import React, { Suspense } from "react";
+import React from "react";
 
 interface UnAuthLayoutProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 const UnAuthLayout = ({ children }: UnAuthLayoutProps) => {

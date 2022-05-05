@@ -3,8 +3,14 @@ import { useAppAuthSelector } from "../hooks/selectors/userSelector";
 import AuthLayout from "../layouts/authLayout";
 import ErrorBoundary from "./errorBoundary";
 
-const PrivateRoute = ({ children, ...rest }: any) => {
+interface Props {}
+
+const PrivateRoute = ({ component:Component, ...rest }: any) => {
   const isAuth = useAppAuthSelector();
+
+  if (!isAuth) {
+    return <Redirect to="/login" />;
+  }
 
   /* 
     //in case of RBAC
@@ -22,15 +28,11 @@ const PrivateRoute = ({ children, ...rest }: any) => {
     <Route
       exact={true}
       path={rest.path}
-      render={(props) =>
-        isAuth ? (
-          <AuthLayout>
-            <ErrorBoundary>{children}</ErrorBoundary>
-          </AuthLayout>
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
+      render={(props) => (
+        <AuthLayout>
+          <ErrorBoundary><Component {...props}/></ErrorBoundary>
+        </AuthLayout>
+      )}
     />
   );
 };

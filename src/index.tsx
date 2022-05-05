@@ -1,27 +1,15 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { refetchOnWindowFocus: false },
-  },
-});
-
 ReactDOM.render(
-  <QueryClientProvider client={queryClient}>
-    <Provider store={store}>
+  <Provider store={store}>
       <App />
-    </Provider>
-    <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-  </QueryClientProvider>,
+  </Provider>,
   document.getElementById("root")
 );
 

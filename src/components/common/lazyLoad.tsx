@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, MutableRefObject } from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 
 interface LazyImageProps {
@@ -17,8 +17,6 @@ const LazyImage = ({
   src,
   onClick,
   alt,
-  showDelete,
-  onDelete,
 }: LazyImageProps) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -54,15 +52,7 @@ const LazyImage = ({
           className={clsx("source", loaded && "loaded", className)}
         />
       )}
-      {showDelete && (
-        <a
-          href="#"
-          className="btn btn-default img-cross"
-          onClick={(e) => onDelete && onDelete(e)}
-        >
-          <i className="icon-1x ki ki-bold-close p-0"></i>{" "}
-        </a>
-      )}
+
     </div>
   );
 };

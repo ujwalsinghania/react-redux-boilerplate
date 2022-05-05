@@ -1,10 +1,11 @@
-import { SITE_URLS } from ".";
+import { SITE_URLS } from "./siteUrls";
 import About from "../containers/about";
 import Dashboard from "../containers/dashboard";
 import Home from "../containers/home";
 import Login from "../containers/login";
+import { RouteType } from "../interfaces/common";
 
-export const ALL_ROUTES = [
+export const ALL_ROUTES: RouteType[] = [
   {
     path: SITE_URLS.HOME,
     component: Home,

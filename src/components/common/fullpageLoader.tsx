@@ -1,9 +1,17 @@
-const FpLoader = () => {
-    return(
-        <div>
-           ...
-        </div>
-    )
-}
+import { useLoaderSelector } from "../../hooks/selectors/commonSelector";
 
-export default FpLoader
+const FpLoader = () => {
+  const isLoading = useLoaderSelector();
+  return (
+    isLoading ? <div className="app-loader-container">
+      <div className="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div> : null
+  );
+};
+
+export default FpLoader;
