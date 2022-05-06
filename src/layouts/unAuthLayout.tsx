@@ -1,7 +1,7 @@
 import React from "react";
 
 interface UnAuthLayoutProps {
-  children: React.ReactNode;
+  children: JSX.Element;
 }
 
 const UnAuthLayout = ({ children }: UnAuthLayoutProps) => {

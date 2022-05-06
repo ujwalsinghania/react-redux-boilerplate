@@ -1,7 +1,7 @@
 import { Component, ReactNode } from "react";
 
 interface Props {
-  children: ReactNode;
+  children: JSX.Element;
 }
 
 interface ErrorState {

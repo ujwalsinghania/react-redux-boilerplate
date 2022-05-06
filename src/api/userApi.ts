@@ -1,6 +1,6 @@
 import { RequestTypes } from "./../interfaces/common";
 import { fetchData } from "./axiosUtils";
-import { LoginReq } from "./../interfaces/apiReqRes";
+import { LoginReq } from "../interfaces/apiResponse";
 import { AppDispatch } from "../redux/store";
 import { API_URLS } from "../config/apiUrls";
 

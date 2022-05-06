@@ -7,7 +7,7 @@ axios.interceptors.request.use(
   function (config: AxiosRequestConfig) {
     let token: string | null = localStorage.getItem("token");
     if (token && config.headers) {
-      config.headers.Authorization = 'Bearer '+token;
+      config.headers.Authorization = "Bearer " + token;
     }
     return config;
   },
@@ -46,7 +46,7 @@ export const fetchData = ({
           //store.dispatch(logoutUser());
         }
         return reject({
-          error: response.data,
+          error: response?.data,
           message: response?.data?.statusCode,
         });
       })

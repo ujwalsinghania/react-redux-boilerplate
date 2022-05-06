@@ -1,3 +1,4 @@
+import { Module, Operation } from "./../../interfaces/common";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
@@ -14,4 +15,14 @@ export const useAppUserSelector = () => {
 export const usePermissionsSelector = () => {
   const permissions = useSelector((state: RootState) => state.user.permissions);
   return permissions;
+};
+
+export const useHasPermissions = () => {
+  const permissions = useSelector((state: RootState) => state.user.permissions);
+  let hasPermissions = (module: Module, operation: Operation[]) =>
+    permissions.some(
+      (permission: any) =>
+        permission.module === module && operation.includes(permission.operation)
+    );
+  return hasPermissions;
 };

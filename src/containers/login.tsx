@@ -1,10 +1,11 @@
 import { useHistory } from "react-router-dom";
-import { getUser, loginUser } from "../../api/userApi";
+import { getUser, loginUser } from "../api/userApi";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import FormTextInput from "../../components/form-elements/textinput/formTextInput";
-import { useAppDispatch } from "../../redux/store";
-import { loginSchema } from "../../interfaces/formSchemas";
+import FormTextInput from "../components/form-elements/textinput/formTextInput";
+import { useAppDispatch } from "../redux/store";
+import { loginSchema } from "../interfaces/formSchemas";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +26,7 @@ const Login = () => {
   const onSubmit = (data: any) => {
     dispatch(loginUser({...data})).then(() => {
      dispatch(getUser()).then(() => {
-        console.log('wow')
+        toast.success('wow')
       }).catch(() => {})
     }).catch(() => {})
   };

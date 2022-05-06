@@ -5,6 +5,17 @@ export enum RequestTypes{
     DELETE= 'DELETE'
 }
 
+export enum Module{
+    
+}
+
+export enum Operation{
+    Create='create',
+    Read='read',
+    Update='update',
+    Delete='delete'
+}
+
 export interface OptionValue{
     label: string;
     value: string;

@@ -1,9 +1,11 @@
 import { SITE_URLS } from "./siteUrls";
-import About from "../containers/about";
-import Dashboard from "../containers/dashboard";
-import Home from "../containers/home";
-import Login from "../containers/login";
+import {lazy} from 'react'
 import { RouteType } from "../interfaces/common";
+const Dashboard = lazy(() => import("../containers/dashboard"));
+const Home = lazy(() => import("../containers/home"));
+const Login = lazy(() => import("../containers/login"));
+
+//use isRestricted = false in case component is accessible both with and without login
 
 export const ALL_ROUTES: RouteType[] = [
   {
@@ -17,12 +19,6 @@ export const ALL_ROUTES: RouteType[] = [
     component: Login,
     isPrivate: false,
     isRestricted: true,
-  },
-  {
-    path: SITE_URLS.ABOUT,
-    component: About,
-    isPrivate: false,
-    isRestricted: false,
   },
   {
     path: SITE_URLS.DASHBOARD,

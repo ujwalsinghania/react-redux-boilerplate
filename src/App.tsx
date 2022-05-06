@@ -3,21 +3,21 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import FpLoader from "./components/common/fullpageLoader";
 import ScrollToTop from "./components/common/scrollToTop";
 import { ALL_ROUTES } from "./config/allRoutes";
-import Home from "./containers/home/home";
 import PrivateRoute from "./hoc/privateRoute";
 import PublicRoute from "./hoc/pulicRoute";
 import { setMe } from "./redux/reducers/userReducer";
 import { useAppDispatch } from "./redux/store";
+import { Toaster } from 'react-hot-toast';
+import Home from "./containers/home";
 
 function App() {
   const dispatch = useAppDispatch();
 
-  
-
   return (
     <BrowserRouter>
-      <div className="App">
+      <>
         <FpLoader />
+        <Toaster position="top-right"/>
         <ScrollToTop>
           <Switch>
             <Route exact path="/" component={Home} />
@@ -30,7 +30,7 @@ function App() {
             )}
           </Switch>
         </ScrollToTop>
-      </div>
+      </>
     </BrowserRouter>
   );
 }
