@@ -28,17 +28,9 @@ if (typeof importScripts === "function") {
     );
 
     workbox.routing.registerRoute(
-      new RegExp("https://reqres.in/api/users/*"),
+      new RegExp("https://reqres.in/api/*"),
       new workbox.strategies.NetworkFirst({
         cacheName: "ca-cache-api",
-      })
-    );
-
-    workbox.routing.registerRoute(
-      new RegExp("https://www.whatasite.ml/*"),
-      //new RegExp('http://localhost:5000/*'),
-      new workbox.strategies.NetworkFirst({
-        cacheName: "ca-cache-local",
       })
     );
   } else {

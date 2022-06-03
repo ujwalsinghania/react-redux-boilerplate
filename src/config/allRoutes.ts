@@ -24,7 +24,7 @@ export const ALL_ROUTES: RouteType[] = [
     path: SITE_URLS.DASHBOARD,
     component: Dashboard,
     isPrivate: true,
-    isRestricted: false,
+    isRestricted: true,
     //module: MODULES.USERS,
     //operation: [OPERATIONS.LIST]
   },

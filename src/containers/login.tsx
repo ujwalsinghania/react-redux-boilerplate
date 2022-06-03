@@ -1,4 +1,3 @@
-import { useHistory } from "react-router-dom";
 import { getUser, loginUser } from "../api/userApi";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,7 +8,6 @@ import toast from "react-hot-toast";
 
 const Login = () => {
   const dispatch = useAppDispatch();
-  const history = useHistory();
 
   const {
     control,
@@ -18,15 +16,15 @@ const Login = () => {
   } = useForm<any>({
     resolver: yupResolver(loginSchema),
     defaultValues: {
-      identifier: "",
-      password: "",
+      email: "eve.holt@reqres.in",
+      password: "cityslicka",
     },
   });
 
   const onSubmit = (data: any) => {
     dispatch(loginUser({...data})).then(() => {
      dispatch(getUser()).then(() => {
-        toast.success('wow')
+        toast.success('wow, you are logged in')
       }).catch(() => {})
     }).catch(() => {})
   };
@@ -40,7 +38,7 @@ const Login = () => {
           </label>
           <Controller
             control={control}
-            name="identifier"
+            name="email"
             render={({ field: { onChange, onBlur, value, name, ref } }) => (
               <FormTextInput
                 name={name}
@@ -49,7 +47,7 @@ const Login = () => {
                 value={value}
                 inputRef={ref}
                 type="email"
-                error={errors.identifier}
+                error={errors.email}
                 placeholder="Enter your email"
               />
             )}

@@ -1,7 +1,9 @@
+export const API_BASE_PATH = process.env.REACT_APP_API_URL
+
 export const API_URLS = {
   AUTH: {
-    LOGIN: "/auth/login",
-    ME: "/auth",
-    LOGOUT: "/auth/logout",
+    LOGIN: "login",
+    ME: "users/2",
+    LOGOUT: "logout",
   },
 };

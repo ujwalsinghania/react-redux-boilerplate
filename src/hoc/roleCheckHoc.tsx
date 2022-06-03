@@ -12,9 +12,9 @@ const RoleCheckHOC = ({ module, operation, children }: RoleHocProps) => {
   const hasPermissions = useHasPermissions();
 
   return (
-    <React.Fragment>
+    <>
       {hasPermissions(module, operation) ? children : null}
-    </React.Fragment>
+    </>
   );
 };
 

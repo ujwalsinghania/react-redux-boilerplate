@@ -1,11 +1,13 @@
+import { API_BASE_PATH } from "./../config/apiUrls";
 import axios, { AxiosRequestConfig } from "axios";
 import { setLoading } from "../redux/reducers/commonReducer";
 import store from "../redux/store";
+import Cookies from "js-cookie";
 
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = API_BASE_PATH;
 axios.interceptors.request.use(
   function (config: AxiosRequestConfig) {
-    let token: string | null = localStorage.getItem("token");
+    let token: string | undefined = Cookies.get("token");
     if (token && config.headers) {
       config.headers.Authorization = "Bearer " + token;
     }

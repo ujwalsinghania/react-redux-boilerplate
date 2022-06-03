@@ -7,7 +7,7 @@ interface FormTextInputProps {
   onChange: (...args: any) => void;
   onBlur: () => void;
   onPaste?: (args: React.ClipboardEvent) => void;
-  value: any;
+  value: string;
   name: string;
   type?: string;
   inputRef?: any;

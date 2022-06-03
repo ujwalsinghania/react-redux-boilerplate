@@ -11,7 +11,7 @@ interface CheckboxInputProps {
   name: string;
   inputRef: any;
   error?: any;
-  id?: string;
+  id: string;
 }
 
 function CheckboxGroupInput({
@@ -38,7 +38,7 @@ function CheckboxGroupInput({
     <React.Fragment>
       {options.map((opt: OptionValue, index: number) => {
         return (
-          <label key={index} className="container-checkbox">
+          <label key={index} className="container-checkbox" htmlFor={id}>
             {opt.label}
             <input
               type="checkbox"
@@ -46,6 +46,7 @@ function CheckboxGroupInput({
               value={opt.value}
               checked={checkedValues.includes(opt.value)}
               onChange={() => handleSelect(opt.value)}
+              id={id}
               ref={inputRef}
             />
             <span className="checkmark" />

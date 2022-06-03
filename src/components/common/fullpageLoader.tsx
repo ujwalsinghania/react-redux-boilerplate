@@ -5,10 +5,10 @@ const FpLoader = () => {
   return (
     isLoading ? <div className="app-loader-container">
       <div className="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div />
+        <div />
+        <div />
+        <div />
       </div>
     </div> : null
   );

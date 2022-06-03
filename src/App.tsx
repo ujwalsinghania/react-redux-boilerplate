@@ -5,29 +5,46 @@ import ScrollToTop from "./components/common/scrollToTop";
 import { ALL_ROUTES } from "./config/allRoutes";
 import PrivateRoute from "./hoc/privateRoute";
 import PublicRoute from "./hoc/pulicRoute";
-import { setMe } from "./redux/reducers/userReducer";
-import { useAppDispatch } from "./redux/store";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 import Home from "./containers/home";
+import AuthLayout from "./layouts/authLayout";
+import UnAuthLayout from "./layouts/unAuthLayout";
+import Dashboard from "./containers/dashboard";
+import { useAppAuthSelector } from "./hooks/selectors/userSelector";
 
 function App() {
-  const dispatch = useAppDispatch();
+  const isAuth = useAppAuthSelector();
 
   return (
     <BrowserRouter>
       <>
         <FpLoader />
-        <Toaster position="top-right"/>
+        <Toaster position="top-right" />
         <ScrollToTop>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route
+              exact
+              path="/"
+              render={() =>
+                isAuth ? (
+                  <AuthLayout>
+                    <Dashboard />
+                  </AuthLayout>
+                ) : (
+                  <UnAuthLayout>
+                    <Home />
+                  </UnAuthLayout>
+                )
+              }
+            />
             {ALL_ROUTES.map((route) =>
-              route.isPrivate ? (
+              route?.isPrivate ? (
                 <PrivateRoute key={route.path} {...route} />
               ) : (
                 <PublicRoute key={route.path} {...route} />
               )
             )}
+            <Route path="*" component={() => <h6>404</h6>} />
           </Switch>
         </ScrollToTop>
       </>

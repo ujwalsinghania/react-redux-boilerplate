@@ -5,7 +5,11 @@ interface UnAuthLayoutProps {
 }
 
 const UnAuthLayout = ({ children }: UnAuthLayoutProps) => {
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+    </>
+  );
 };
 
 export default UnAuthLayout;

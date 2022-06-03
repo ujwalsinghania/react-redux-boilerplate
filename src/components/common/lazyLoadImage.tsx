@@ -7,8 +7,6 @@ interface LazyImageProps {
   containerClassName?: string;
   alt?: string;
   onClick?: any;
-  showDelete?: boolean;
-  onDelete?: (evt: React.MouseEvent, ...args: any) => void;
 }
 
 const LazyImage = ({

@@ -7,6 +7,7 @@ import AuthLayout from "../layouts/authLayout";
 import ErrorBoundary from "./errorBoundary";
 import { Suspense } from "react";
 import SuspenseLoader from "../components/common/suspenseLoader";
+import { SITE_URLS } from "../config/siteUrls";
 
 interface Props {}
 
@@ -14,7 +15,7 @@ const PrivateRoute = ({ component: Component, ...rest }: any) => {
   const isAuth = useAppAuthSelector();
 
   if (!isAuth) {
-    return <Redirect to="/login" />;
+    return <Redirect to={SITE_URLS.LOGIN} />;
   }
 
   //in case of RBAC
