@@ -8,25 +8,23 @@ import ErrorBoundary from "./errorBoundary";
 import { Suspense } from "react";
 import SuspenseLoader from "../components/common/suspenseLoader";
 import { SITE_URLS } from "../config/siteUrls";
+import toast from "react-hot-toast";
+import { RouteType } from "../interfaces/common";
 
-interface Props {}
-
-const PrivateRoute = ({ component: Component, ...rest }: any) => {
+const PrivateRoute = ({ component: Component, ...rest }: RouteType) => {
   const isAuth = useAppAuthSelector();
+  let hasPermissions = useHasPermissions();
 
   if (!isAuth) {
     return <Redirect to={SITE_URLS.LOGIN} />;
   }
 
-  //in case of RBAC
-  /*  
- let hasPermissions = useHasPermissions();
+  //use this to enable RBAC
   let { module, operation } = rest;
   if (module && operation && !hasPermissions(module, operation)) {
     toast.error("You don't have permission");
-    return <Redirect to="/dashboard" />;
-  } 
-  */
+    return <Redirect to={SITE_URLS.DASHBOARD} />;
+  }
 
   return (
     <Route

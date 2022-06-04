@@ -18,6 +18,7 @@ function render() {
     document.getElementById("root")
   );
 }
+
 let token = Cookies.get("token");
 //fetch and set user on page refresh
 if (token) {
@@ -26,12 +27,12 @@ if (token) {
       method: "GET",
       url: API_BASE_PATH + API_URLS.AUTH.ME,
       headers: {
-        test: 'dssdsd',
+        test: "dssdsd",
         Authorization: `Bearer ${token}`,
       },
     })
       .then((resp: any) => {
-        store.dispatch(setMe(resp.data.data));
+        store.dispatch(setMe(resp.data.data));        
         render();
       })
       .catch((error) => {

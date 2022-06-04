@@ -1,6 +1,8 @@
+import { Module, Operations } from '../interfaces/common';
 import { SITE_URLS } from "./siteUrls";
 import {lazy} from 'react'
 import { RouteType } from "../interfaces/common";
+const Users = lazy(() => import("../containers/users"));
 const Dashboard = lazy(() => import("../containers/dashboard"));
 const Home = lazy(() => import("../containers/home"));
 const Login = lazy(() => import("../containers/login"));
@@ -25,7 +27,13 @@ export const ALL_ROUTES: RouteType[] = [
     component: Dashboard,
     isPrivate: true,
     isRestricted: true,
-    //module: MODULES.USERS,
-    //operation: [OPERATIONS.LIST]
+  },
+  {
+    path: SITE_URLS.USERS,
+    component: Users,
+    isPrivate: true,
+    isRestricted: true,
+    module: Module.USERS,
+    operation: [Operations.LIST]
   },
 ];

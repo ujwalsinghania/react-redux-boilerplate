@@ -4,10 +4,9 @@ import { LoginReq } from "../interfaces/apiResponse";
 import { AppDispatch } from "../redux/store";
 import { API_URLS } from "../config/apiUrls";
 import Cookies from "js-cookie";
-import { setMe } from "../redux/reducers/userReducer";
 
 // return a promise is some redux action has to be performed
-export const loginUser = (data: LoginReq) => (dispatch: AppDispatch) => {
+export const loginUser = (data: LoginReq): any => (dispatch: AppDispatch) => {
   return new Promise((resolve, reject) => {
     fetchData({
       url: API_URLS.AUTH.LOGIN,
@@ -25,39 +24,27 @@ export const loginUser = (data: LoginReq) => (dispatch: AppDispatch) => {
 };
 
 // directly return the fetch call if no intermediate action has to performed
-export const getUser = () => (dispatch: AppDispatch) => {
-  return new Promise((resolve, reject) => {
-    fetchData({
-      url: API_URLS.AUTH.ME,
-      method: RequestTypes.GET,
-      data:null,
-    })
-      .then((res: any) => {
-        console.log(res.data.data)
-        dispatch(setMe(res.data.data))
-        return resolve(res);
-      })
-      .catch((error) => {
-        return reject(error);
-      });
+export const getUser = (): any => (dispatch: AppDispatch) => {
+  return fetchData({
+    url: API_URLS.AUTH.ME,
+    method: RequestTypes.GET,
+    data: null,
   });
 };
 
-/* export const logoutUser = () => {
-  return request({
+export const logoutUser = () => {
+  return fetchData({
     url: API_URLS.AUTH.LOGOUT,
-    method: "post",
+    method: RequestTypes.GET,
     isAuth: true,
   });
 };
-*/
 
-/* export const listUsers = () => {
-  return request({
-    url: API_URLS.AUTH.LOGIN + 'test',
-    method: "get",
-    params: {page: 1},
-    isAuth: false,
+export const listUsers = (): any => (dispatch: AppDispatch) => {
+  return fetchData({
+    url: API_URLS.USERS.LIST,
+    method: RequestTypes.GET,
+    params: { page: 2 },
+    isAuth: true,
   });
 };
-*/

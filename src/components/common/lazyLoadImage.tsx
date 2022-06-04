@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import clsx from "clsx";
 
 interface LazyImageProps {
@@ -6,6 +6,8 @@ interface LazyImageProps {
   className?: string;
   containerClassName?: string;
   alt?: string;
+  width?: string;
+  height?: string;
   onClick?: any;
 }
 
@@ -15,6 +17,8 @@ const LazyImage = ({
   src,
   onClick,
   alt,
+  width,
+  height,
 }: LazyImageProps) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -34,10 +38,10 @@ const LazyImage = ({
 
   return (
     <div className={clsx(containerClassName)}>
-      {!loaded && !error && <i className="fa fa-spinner fa-spin"></i>}
+      {!loaded && !error && <i className="fas fa-spinner fa-spin"></i>}
       {loaded && error && (
         <span className="text-muted">
-          <i className="fa fa-exclamation-circle mr-2" aria-hidden="true"></i>
+          <i className="fas fa-circle-exclamation mr-2"></i>
           Failed to load image
         </span>
       )}
@@ -46,11 +50,12 @@ const LazyImage = ({
           loading="lazy"
           onClick={onClick}
           src={src}
+          width={width}
+          height={height}
           alt={alt}
           className={clsx("source", loaded && "loaded", className)}
         />
       )}
-
     </div>
   );
 };

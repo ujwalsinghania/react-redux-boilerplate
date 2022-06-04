@@ -1,31 +1,32 @@
-export enum RequestTypes{
-    POST= 'POST',
-    GET= 'GET',
-    PUT='PUT',
-    DELETE= 'DELETE'
+export enum RequestTypes {
+  POST = "POST",
+  GET = "GET",
+  PUT = "PUT",
+  DELETE = "DELETE",
 }
 
-export enum Module{
-    
+export enum Module {
+  USERS = "users",
 }
 
-export enum Operation{
-    Create='create',
-    Read='read',
-    Update='update',
-    Delete='delete'
+export enum Operations {
+  Create = "create",
+  Read = "read",
+  Update = "update",
+  Delete = "delete",
+  LIST = "list",
 }
 
-export interface OptionValue{
-    label: string;
-    value: string;
+export interface OptionValue {
+  label: string;
+  value: string;
 }
 
 export interface RouteType {
-    path: string;
-    component: React.ReactNode;
-    isPrivate: boolean;
-    isRestricted: boolean;
-    module?: string;
-    operation?: string[];
-  }
+  path: string;
+  component: any;
+  isPrivate: boolean;
+  isRestricted: boolean;
+  module?: Module;
+  operation?: Operations[];
+}

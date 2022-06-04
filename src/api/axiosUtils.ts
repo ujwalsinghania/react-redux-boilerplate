@@ -39,10 +39,10 @@ export const fetchData = ({
       method,
       [dataOrParams]: data,
     })
-      .then((resp) => {
+      .then((resp:any) => {
         return resolve(resp.data);
       })
-      .catch((error) => {
+      .catch((error:any) => {
         const { response } = error;
         if (response?.status === 403) {
           //store.dispatch(logoutUser());

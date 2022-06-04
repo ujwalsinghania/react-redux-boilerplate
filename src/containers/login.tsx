@@ -5,6 +5,12 @@ import FormTextInput from "../components/form-elements/textinput/formTextInput";
 import { useAppDispatch } from "../redux/store";
 import { loginSchema } from "../interfaces/formSchemas";
 import toast from "react-hot-toast";
+import { setMe } from "../redux/reducers/userReducer";
+
+interface IForm {
+  email: string;
+  password: string;
+}
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +19,7 @@ const Login = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<any>({
+  } = useForm<IForm>({
     resolver: yupResolver(loginSchema),
     defaultValues: {
       email: "eve.holt@reqres.in",
@@ -21,12 +27,17 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (data: any) => {
-    dispatch(loginUser({...data})).then(() => {
-     dispatch(getUser()).then(() => {
-        toast.success('wow, you are logged in')
-      }).catch(() => {})
-    }).catch(() => {})
+  const onSubmit = (data: IForm) => {
+    dispatch(loginUser({ ...data }))
+      .then(() => {
+        dispatch(getUser())
+          .then((res: any) => {
+            toast.success("wow, you are logged in");
+            dispatch(setMe(res.data.data));
+          })
+          .catch(() => {});
+      })
+      .catch(() => {});
   };
 
   return (

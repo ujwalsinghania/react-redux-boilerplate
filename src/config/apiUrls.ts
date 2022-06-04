@@ -6,4 +6,7 @@ export const API_URLS = {
     ME: "users/2",
     LOGOUT: "logout",
   },
+  USERS: {
+    LIST: 'users'
+  }
 };

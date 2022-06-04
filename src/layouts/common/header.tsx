@@ -27,8 +27,8 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={SITE_URLS.ROLE_PERMISSION}>
-                Role Permission
+              <Link className="nav-link" to={SITE_URLS.USERS}>
+                Users
               </Link>
             </li>
           </ul>

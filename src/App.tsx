@@ -11,6 +11,7 @@ import AuthLayout from "./layouts/authLayout";
 import UnAuthLayout from "./layouts/unAuthLayout";
 import Dashboard from "./containers/dashboard";
 import { useAppAuthSelector } from "./hooks/selectors/userSelector";
+import { RouteType } from "./interfaces/common";
 
 function App() {
   const isAuth = useAppAuthSelector();
@@ -37,7 +38,7 @@ function App() {
                 )
               }
             />
-            {ALL_ROUTES.map((route) =>
+            {ALL_ROUTES.map((route: RouteType) =>
               route?.isPrivate ? (
                 <PrivateRoute key={route.path} {...route} />
               ) : (

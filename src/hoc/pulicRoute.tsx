@@ -3,9 +3,10 @@ import { Route, Redirect } from "react-router-dom";
 import SuspenseLoader from "../components/common/suspenseLoader";
 import { SITE_URLS } from "../config/siteUrls";
 import { useAppAuthSelector } from "../hooks/selectors/userSelector";
+import { RouteType } from "../interfaces/common";
 import UnAuthLayout from "../layouts/unAuthLayout";
 
-const PublicRoute = ({ component: Component, ...rest }: any) => {
+const PublicRoute = ({ component: Component, ...rest }: RouteType) => {
   const isAuth = useAppAuthSelector();
   console.log(isAuth, rest);
 

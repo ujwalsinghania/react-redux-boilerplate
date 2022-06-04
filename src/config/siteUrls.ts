@@ -3,5 +3,5 @@ export const SITE_URLS = {
   DASHBOARD: "/dashboard",
   ABOUT: "/about",
   HOME: "/home",
-  ROLE_PERMISSION: "/roles"
+  USERS: "/users"
 };
