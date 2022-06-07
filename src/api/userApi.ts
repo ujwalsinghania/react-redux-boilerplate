@@ -32,13 +32,6 @@ export const getUser = (): any => (dispatch: AppDispatch) => {
   });
 };
 
-export const logoutUser = () => {
-  return fetchData({
-    url: API_URLS.AUTH.LOGOUT,
-    method: RequestTypes.GET,
-    isAuth: true,
-  });
-};
 
 export const listUsers = (): any => (dispatch: AppDispatch) => {
   return fetchData({
@@ -48,3 +41,4 @@ export const listUsers = (): any => (dispatch: AppDispatch) => {
     isAuth: true,
   });
 };
+

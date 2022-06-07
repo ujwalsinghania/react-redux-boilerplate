@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
 import { SITE_URLS } from "../../config/siteUrls";
+import { logout } from "../../redux/reducers/userReducer";
+import { useAppDispatch } from "../../redux/store";
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+
+  const logoutUser = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -30,6 +39,11 @@ const Header = () => {
               <Link className="nav-link" to={SITE_URLS.USERS}>
                 Users
               </Link>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#" onClick={logoutUser}>
+                Logout
+              </a>
             </li>
           </ul>
         </div>
