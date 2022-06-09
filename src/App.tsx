@@ -7,14 +7,10 @@ import PrivateRoute from "./hoc/privateRoute";
 import PublicRoute from "./hoc/pulicRoute";
 import { Toaster } from "react-hot-toast";
 import Home from "./containers/home";
-import AuthLayout from "./layouts/authLayout";
 import UnAuthLayout from "./layouts/unAuthLayout";
-import Dashboard from "./containers/dashboard";
-import { useAppAuthSelector } from "./hooks/selectors/userSelector";
 import { RouteType } from "./interfaces/common";
 
 function App() {
-  const isAuth = useAppAuthSelector();
 
   return (
     <BrowserRouter>
@@ -26,17 +22,9 @@ function App() {
             <Route
               exact
               path="/"
-              render={() =>
-                isAuth ? (
-                  <AuthLayout>
-                    <Dashboard />
-                  </AuthLayout>
-                ) : (
-                  <UnAuthLayout>
-                    <Home />
-                  </UnAuthLayout>
-                )
-              }
+              render={(props) => <UnAuthLayout>
+                <Home />
+              </UnAuthLayout>}
             />
             {ALL_ROUTES.map((route: RouteType) =>
               route?.isPrivate ? (

@@ -4,18 +4,11 @@ import {lazy} from 'react'
 import { RouteType } from "../interfaces/common";
 const Users = lazy(() => import("../containers/users"));
 const Dashboard = lazy(() => import("../containers/dashboard"));
-const Home = lazy(() => import("../containers/home"));
 const Login = lazy(() => import("../containers/login"));
 
-//use isRestricted = false in case component is accessible both with and without login
+//use isRestricted = false in case component is accessible both with and without login. For eg: Landing Page
 
 export const ALL_ROUTES: RouteType[] = [
-  {
-    path: SITE_URLS.HOME,
-    component: Home,
-    isPrivate: false,
-    isRestricted: false,
-  },
   {
     path: SITE_URLS.LOGIN,
     component: Login,
@@ -36,4 +29,5 @@ export const ALL_ROUTES: RouteType[] = [
     module: Module.USERS,
     operation: [Operations.LIST]
   },
+  
 ];

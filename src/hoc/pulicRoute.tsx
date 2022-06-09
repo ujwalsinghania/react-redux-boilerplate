@@ -8,7 +8,6 @@ import UnAuthLayout from "../layouts/unAuthLayout";
 
 const PublicRoute = ({ component: Component, ...rest }: RouteType) => {
   const isAuth = useAppAuthSelector();
-  console.log(isAuth, rest);
 
   if (isAuth && rest.isRestricted) {
     return <Redirect to={SITE_URLS.DASHBOARD} />;
